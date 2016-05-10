@@ -23,6 +23,7 @@
 
 ;; Look and feel
 (setq inhibit-startup-message t)
+(scroll-bar-mode -1)
 (custom-set-variables
  '(initial-frame-alist (quote ((fullscreen . maximized)))))
 (load-theme 'monokai t)
@@ -33,7 +34,10 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
-
-;; TODO:
-;; - ~/repositories/emacs.d/ and symlink
-;; - manage emacs' backup files
+;; Backup files
+(setq backup-by-copying t)
+(setq backup-directory-alist '(("" . "~/.emacs-saves")))
+(setq delete-old-versions t)
+(setq kept-new-versions 6)
+(setq kept-old-versions 2)
+(setq version-control t)
