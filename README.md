@@ -1,2 +1,3 @@
-# dotfiles
-My configuration files
+## My configuration files
+
+Trying to version control all my configurations to generate a reproducible working environment.
