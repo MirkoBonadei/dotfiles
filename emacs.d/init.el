@@ -9,6 +9,7 @@
 (defvar required-packages
   '(magit
     helm
+    erlang
     monokai-theme))
 
 ;; activate installed packages
