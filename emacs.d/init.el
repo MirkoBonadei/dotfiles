@@ -10,6 +10,7 @@
   '(magit
     helm
     erlang
+    paper-theme
     monokai-theme))
 
 ;; activate installed packages
@@ -27,7 +28,7 @@
 (scroll-bar-mode -1)
 (custom-set-variables
  '(initial-frame-alist (quote ((fullscreen . maximized)))))
-(load-theme 'monokai t)
+(load-theme 'paper t)
 
 ;; Text manipulation
 (setq-default fill-column 80)
