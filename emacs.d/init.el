@@ -24,7 +24,6 @@
 ;; ============================================
 
 ;; Look and feel
-(require 'better-defaults)
 (set-frame-font "Inconsolata 14")
 (setq inhibit-startup-message t)
 (scroll-bar-mode -1)
