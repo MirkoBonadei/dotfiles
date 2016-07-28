@@ -3,20 +3,20 @@
 
 (setq package-enable-at-startup nil)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-			 ("marmalade" . "https://marmalade-repo.org/packages/")
-			 ("melpa" . "https://melpa.org/packages/")))
+                         ("marmalade" . "https://marmalade-repo.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
 
 (defvar required-packages
   '(magit
     helm
+    projectile
     erlang
-    paper-theme
-    monokai-theme))
+    drag-stuff
+    moe-theme))
 
 ;; activate installed packages
 (package-initialize)
 
-;; ensure default-packages are all installed
 (dolist (p required-packages)
   (when (not (package-installed-p p))
     (package-install p)))
@@ -24,13 +24,34 @@
 ;; ============================================
 
 ;; Look and feel
+(require 'better-defaults)
+(set-frame-font "Inconsolata 14")
 (setq inhibit-startup-message t)
 (scroll-bar-mode -1)
-(custom-set-variables
- '(initial-frame-alist (quote ((fullscreen . maximized)))))
-(load-theme 'paper t)
+(custom-set-variables '(initial-frame-alist (quote ((fullscreen . maximized)))))
+;; Moe theme
+(require 'moe-theme)
+(setq moe-theme-highlight-buffer-id t)
+(moe-theme-set-color 'green)
+;;(moe-light)
+(moe-dark)
+
+(set-face-foreground 'font-lock-comment-face "orange")
+
+;; Helm
+(helm-mode 1)
+(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(setq helm-candidate-number-limit 100
+     helm-idle-delay 0.0
+     helm-input-idle-delay 0.01
+     helm-quick-update t
+     helm-ff-skip-boring-files t)
 
 ;; Text manipulation
+(drag-stuff-global-mode 1)
 (setq-default fill-column 80)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (setq-default indent-tabs-mode nil)
