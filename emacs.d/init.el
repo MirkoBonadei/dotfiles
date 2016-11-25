@@ -1,55 +1,12 @@
-;; ELPA configuration and package installation
-(require 'package)
-
-(setq package-enable-at-startup nil)
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
-
-(defvar required-packages
-  '(magit
-    helm
-    projectile
-    erlang
-    drag-stuff
-    moe-theme))
-
-;; activate installed packages
 (package-initialize)
+(require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
+(cask-initialize)
 
-(dolist (p required-packages)
-  (when (not (package-installed-p p))
-    (package-install p)))
-
-;; ============================================
-
-;; Look and feel
-(set-frame-font "Inconsolata 14")
+(set-frame-font "Inconsolata 16")
+(set-face-attribute 'default nil :height 165)
 (setq inhibit-startup-message t)
 (scroll-bar-mode -1)
-(custom-set-variables '(initial-frame-alist (quote ((fullscreen . maximized)))))
-;; Moe theme
-(require 'moe-theme)
-(setq moe-theme-highlight-buffer-id t)
-(moe-theme-set-color 'green)
-;;(moe-light)
-(moe-dark)
-
-(set-face-foreground 'font-lock-comment-face "orange")
-
-;; Helm
-(helm-mode 1)
-(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "M-y") 'helm-show-kill-ring)
-(setq helm-candidate-number-limit 100
-     helm-idle-delay 0.0
-     helm-input-idle-delay 0.01
-     helm-quick-update t
-     helm-ff-skip-boring-files t)
-
-;; Text manipulation
+(toggle-frame-maximized)
 (drag-stuff-global-mode 1)
 (setq-default fill-column 80)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
@@ -65,6 +22,13 @@
 (setq version-control t)
 
 ;; ============================================
+
+;; org-mode
+(global-set-key (kbd "C-c a") 'org-agenda)
+(setq org-agenda-files '("~/Documents/archive/index.org"))
+
+;; javascript defaults
+(setq js-indent-level 2)
 
 ;; Personal Home Page
 (require 'ox-html)
